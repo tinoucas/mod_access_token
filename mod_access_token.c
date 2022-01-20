@@ -108,7 +108,7 @@ static apr_status_t access_token_parse_args( request_rec *r, apr_table_t *params
     while(*args && (val = ap_getword(r->pool, &args, '&'))) {
         char *name = ap_getword_nc(r->pool, &val, '=');
         if(name != NULL && val != NULL) {
-            if(ap_unescape_url_keep2f(val) == OK)
+            if(ap_unescape_url_keep2f(val, 0) == OK)
                 apr_table_set(params, name, val);
         }
     }
