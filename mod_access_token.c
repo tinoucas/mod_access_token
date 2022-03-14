@@ -158,7 +158,7 @@ static int check_access_token(request_rec *r)
 
     if(apr_atoi64( expires ) < apr_time_sec( apr_time_now() )) {
         ERR(r, "Request has expired");
-        return HTTP_FORBIDDEN;
+        return HTTP_GONE;
     }
     plain = apr_psprintf(r->pool, "%s%s%s%s", r->method, r->uri, expires, access_key);
     check_sig = hmac_sha1(r->pool, plain, conf->secret);
